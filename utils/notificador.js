@@ -46,15 +46,15 @@ async function generarAvisos() {
 }
 
 // ✅ Crear aviso si no existe
-async function crearAvisoSiNoExiste(personaId, citaId, mensaje) {
+async function crearAvisoSiNoExiste(personaId, citaId, mensajeBase) {
   // 📌 Selección dinámica de query según motor de BD
-  const avisoSelectQuery = process.env.DB_CLIENT === 'oracle' 
+const avisoSelectQuery = process.env.DB_CLIENT === 'oracle' 
     ? avisoQueries.SELECT_BY_PERSONA_CITA_MENSAJE_ORACLE
     : avisoQueries.SELECT_BY_PERSONA_CITA_MENSAJE_POSTGRES;
 
   const avisosExistentes = await db.query(
     avisoSelectQuery,
-    [personaId, citaId, mensaje]
+    [personaId, citaId, mensajeBase]
   );
 
   const yaExiste = (avisosExistentes.rows && avisosExistentes.rows.length > 0)
@@ -62,8 +62,30 @@ async function crearAvisoSiNoExiste(personaId, citaId, mensaje) {
 
   if (!yaExiste) {
     const idAviso = Math.floor(Math.random() * 1000000);
-    await db.query(avisoQueries.INSERT, [idAviso, personaId, citaId, mensaje, new Date()]);
-    console.log(`✅ Aviso creado para persona ${personaId}: "${mensaje}"`);
+
+    // 🔍 Consulta el teléfono de la persona según motor de BD
+    const telefonoQuery = process.env.DB_CLIENT === 'oracle'
+      ? `SELECT TELEFONO FROM PERSONAS WHERE ID_PERSONA = :1`
+      : `SELECT TELEFONO FROM PERSONAS WHERE ID_PERSONA = $1`;
+
+    const telefonoResult = await db.query(telefonoQuery, [personaId]);
+
+    const telefono =
+      telefonoResult.rows?.[0]?.TELEFONO || telefonoResult.rows?.[0]?.telefono ||
+      telefonoResult?.[0]?.TELEFONO || telefonoResult?.[0]?.telefono || 'N/A';
+
+    // 📩 Arma el mensaje final
+    const mensajeFinal = `${mensajeBase} | WhatsApp: ${telefono}`;
+
+    await db.query(avisoQueries.INSERT, [
+      idAviso,
+      personaId,
+      citaId,
+      mensajeFinal,
+      new Date()
+    ]);
+
+    console.log(`✅ Aviso creado para persona ${personaId}: "${mensajeFinal}"`);
   }
 }
 
