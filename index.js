@@ -23,7 +23,7 @@ async function startServer() {
     });
 
     // Ejecutar la función generarAvisos cada 30 minutos
-    const INTERVALO_MINUTOS = 1;
+    const INTERVALO_MINUTOS = 180;
     setInterval(() => {
       generarAvisos(); // 🔔 Ejecutar aviso automático
     }, INTERVALO_MINUTOS * 60 * 1000);
