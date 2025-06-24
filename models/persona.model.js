@@ -1,9 +1,9 @@
-function Persona({ id_persona, nombre, email, telefono }) {
+function Persona(row) {
   return {
-    id: id_persona,
-    nombre,
-    email,
-    telefono
+    id: row.ID_PERSONA || row.id_persona,
+    nombre: row.NOMBRE || row.nombre,
+    email: row.EMAIL || row.email,
+    telefono: row.TELEFONO || row.telefono
   };
 }
 

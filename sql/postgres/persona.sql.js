@@ -1,8 +1,21 @@
-// sql/postgres/persona.sql.js
 module.exports = {
-  INSERT: `INSERT INTO personas (id_persona, nombre, email, telefono) VALUES ($1, $2, $3, $4)`,
-  SELECT_ALL: `SELECT * FROM personas`,
-  SELECT_BY_ID: `SELECT * FROM personas WHERE id_persona = $1`,
-  UPDATE: `UPDATE personas SET nombre = $2, email = $3, telefono = $4 WHERE id_persona = $1`,
-  DELETE: `DELETE FROM personas WHERE id_persona = $1`
+  INSERT: `
+    INSERT INTO PERSONAS (ID_PERSONA, NOMBRE, EMAIL, TELEFONO)
+    VALUES ($1, $2, $3, $4)
+  `,
+  SELECT_ALL: `
+    SELECT * FROM PERSONAS
+  `,
+  SELECT_BY_ID: `
+    SELECT * FROM PERSONAS WHERE ID_PERSONA = $1
+  `,
+  UPDATE: `
+    UPDATE PERSONAS
+    SET NOMBRE = $2, EMAIL = $3, TELEFONO = $4
+    WHERE ID_PERSONA = $1
+  `,
+  DELETE: `
+    DELETE FROM PERSONAS WHERE ID_PERSONA = $1
+  `
 };
+

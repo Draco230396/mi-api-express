@@ -10,7 +10,7 @@ async function connect() {
     // ✅ Conectar a Oracle con una sola conexión por ahora
     pool = await oracledb.getConnection({
       user: process.env.DB_USER || 'C##DRACO',
-      password: process.env.DB_PASSWORD || 'N4tur4l3s*_#',
+      password: process.env.DB_PASSWORD || 'N4tur4l3s*_#8',
       connectString: process.env.DB_CONNECTION_STRING || 'localhost:1521/xe'
     });
     console.log('✅ Conectado a Oracle exitosamente');

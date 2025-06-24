@@ -1,10 +1,9 @@
-function Cita({ id_cita, id_persona, fecha_hora, motivo }) {
+function Cita(row){
   return {
-    id: id_cita,
-    personaId: id_persona,
-    fechaHora: fecha_hora,
-    motivo
+    id: row.ID_CITA || row.id_cita,
+    personaId: row.PERSONAID ||  row.id_persona,
+    fechaHora: row.FECAHORA || row.fecha_hora,
+    motivo: row.MOTIVO || row.motivo
   };
 }
-
 module.exports = Cita;
