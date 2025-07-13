@@ -1,4 +1,5 @@
-const db = require('../config/db');
+const Database = require('../config/db');
+const db = Database.getInstance(); // ✅ ahora tienes la instancia real con .query()
 const avisoQueries = require(`../sql/${process.env.DB_CLIENT}/aviso.sql`);
 const { generarAvisos } = require('../utils/notificador');
 

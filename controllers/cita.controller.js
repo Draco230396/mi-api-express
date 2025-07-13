@@ -1,4 +1,5 @@
-const db = require('../config/db');
+const Database = require('../config/db');
+const db = Database.getInstance(); // ✅ ahora tienes la instancia real con .query()
 const queries = require(`../sql/${process.env.DB_CLIENT}/cita.sql.js`);
 const Cita = require('../models/cita.model');
 

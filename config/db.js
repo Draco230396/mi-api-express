@@ -1,3 +1,4 @@
+// config/db.js
 require('dotenv').config();
 const oracledb = require('oracledb');
 const { Pool } = require('pg');
@@ -7,7 +8,8 @@ class Database {
     this.pool = null;
     this.dbClient = process.env.DB_CLIENT;
   }
-static instance;
+
+  static instance;
 
   static getInstance() {
     if (!Database.instance) {
@@ -56,4 +58,4 @@ static instance;
   }
 }
 
-module.exports = Database.getInstance();
+module.exports = Database; // <--- exporta la clase, no la instancia

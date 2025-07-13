@@ -1,5 +1,6 @@
+const Database = require('../config/db');
+const db = Database.getInstance(); // ✅ ahora tienes la instancia real con .query()
 const Persona = require('../models/persona.model');
-const db = require('../config/db');
 const queries = require(`../sql/${process.env.DB_CLIENT}/persona.sql.js`);
 
 const generarId = () => Math.floor(Math.random() * 1000000); // genera ID simple, reemplazar con secuencia en BD real

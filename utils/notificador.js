@@ -1,4 +1,5 @@
-const db = require('../config/db');
+const Database = require('../config/db');
+const db = Database.getInstance(); // ✅ AQUÍ ESTÁ BIEN
 const citaQueries = require(`../sql/${process.env.DB_CLIENT}/cita.sql.js`);
 const avisoQueries = require(`../sql/${process.env.DB_CLIENT}/aviso.sql.js`);
 

@@ -1,7 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const debug = require('debug')('app:server');
-const db = require('./config/db');
+const Database = require('./config/db'); // Singleton de conexión
+const db = Database.getInstance(); // Obtenemos la instancia del Singleton
 const { generarAvisos } = require('./utils/notificador');
 
 const app = express();
@@ -13,6 +14,8 @@ app.use(express.json());
 app.use('/api/personas', require('./routes/persona.routes'));
 app.use('/api/citas', require('./routes/cita.routes'));
 app.use('/api/avisos', require('./routes/aviso.routes'));
+app.use('/api/auth', require('./routes/auth.routes'));
+
 
 // Función para iniciar el servidor y conectar a la BD
 async function startServer() {
@@ -23,7 +26,7 @@ async function startServer() {
     });
 
     // Ejecutar la función generarAvisos cada 30 minutos
-    const INTERVALO_MINUTOS = 180;
+    const INTERVALO_MINUTOS = 1;
     setInterval(() => {
       generarAvisos(); // 🔔 Ejecutar aviso automático
     }, INTERVALO_MINUTOS * 60 * 1000);
