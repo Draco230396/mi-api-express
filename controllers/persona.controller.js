@@ -47,19 +47,26 @@ exports.crearPersona = async (req, res) => {
 
 exports.actualizarPersona = async (req, res) => {
   try {
-    const id = req.params.id;
+    const id = Number(req.params.id);
+    if (isNaN(id)) {
+      return res.status(400).json({ error: 'ID inválido, debe ser numérico' });
+    }
+
     const { nombre, email, telefono } = req.body;
 
-    // Actualiza la persona
-    await db.query(queries.UPDATE, [id, nombre, email, telefono]);
+    console.log('Actualizando persona:', { id, nombre, email, telefono });
+
+    // Reordena los parámetros según tu SQL (nombre, email, telefono, id)
+    const result = await db.query(queries.UPDATE, [nombre, email, telefono, id]);
+    console.log('✅ Filas afectadas en UPDATE:', result.rowsAffected);
+
+    if (result.rowsAffected === 0) {
+      return res.status(404).json({ message: 'Persona no encontrada para actualizar' });
+    }
 
     // Consulta para retornar la nueva persona actualizada
-    const result = await db.query(queries.SELECT_BY_ID, [id]);
-    const rows = result.rows || result;
-
-    if (rows.length === 0) {
-      return res.status(404).json({ message: 'Persona no encontrada después de actualizar' });
-    }
+    const updated = await db.query(queries.SELECT_BY_ID, [id]);
+    const rows = updated.rows || updated;
 
     res.json({
       message: 'Persona actualizada',
@@ -70,6 +77,7 @@ exports.actualizarPersona = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
 
 exports.eliminarPersona = async (req, res) => {
   try {

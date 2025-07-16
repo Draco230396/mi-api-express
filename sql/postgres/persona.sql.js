@@ -11,8 +11,8 @@ module.exports = {
   `,
   UPDATE: `
     UPDATE PERSONAS
-    SET NOMBRE = $2, EMAIL = $3, TELEFONO = $4
-    WHERE ID_PERSONA = $1
+    SET NOMBRE = $1, EMAIL = $2, TELEFONO = $3
+    WHERE ID_PERSONA = $4
   `,
   DELETE: `
     DELETE FROM PERSONAS WHERE ID_PERSONA = $1

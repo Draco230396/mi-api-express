@@ -1,5 +1,7 @@
 require('dotenv').config();
+console.log('🧪 DB_CLIENT desde index env:', process.env.DB_CLIENT);
 const express = require('express');
+const cors = require('cors'); // 👈 importar cors
 const debug = require('debug')('app:server');
 const Database = require('./config/db'); // Singleton de conexión
 const db = Database.getInstance(); // Obtenemos la instancia del Singleton
@@ -9,7 +11,8 @@ const app = express();
 
 // Middleware para parsear JSON
 app.use(express.json());
-
+app.use(cors({ origin: 'http://localhost:3000', credentials: true })); // 👈 usar cors aquí
+app.use(express.json());
 // Rutas
 app.use('/api/personas', require('./routes/persona.routes'));
 app.use('/api/citas', require('./routes/cita.routes'));
@@ -21,8 +24,8 @@ app.use('/api/auth', require('./routes/auth.routes'));
 async function startServer() {
   try {
     await db.connect(); // Espera la conexión correctamente
-    app.listen(3000, () => {
-      console.log('🚀 Servidor iniciado en http://localhost:3000');
+    app.listen(3001, () => {
+      console.log('🚀 Servidor iniciado en http://localhost:3001');
     });
 
     // Ejecutar la función generarAvisos cada 30 minutos
