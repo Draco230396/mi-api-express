@@ -1,27 +1,41 @@
-// sql/postgres/cita.sql.js
 module.exports = {
   INSERT: `
-    INSERT INTO CITAS (ID_CITA, ID_PERSONA, FECHA_HORA, MOTIVO)
-    VALUES ($1, $2, $3, $4)
+    INSERT INTO citas (
+      id_cita, id_persona, titulo, fecha, hora_inicio, hora_final,
+      nombre_cliente, numero_cliente, motivo
+    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
   `,
+
   SELECT_ALL: `
-    SELECT * FROM CITAS
+    SELECT * FROM citas
   `,
+
   SELECT_BY_ID: `
-    SELECT * FROM CITAS WHERE ID_CITA = $1
+    SELECT * FROM citas WHERE id_cita = $1
+  `,
+ SELECT_BY_ID_PERSONA: `
+    SELECT * FROM citas WHERE id_persona = $1
   `,
   UPDATE: `
-    UPDATE CITAS
-    SET ID_PERSONA = $2, FECHA_HORA = $3, MOTIVO = $4
-    WHERE ID_CITA = $1
+    UPDATE citas SET
+      id_persona = $2,
+      titulo = $3,
+      fecha = $4,
+      hora_inicio = $5,
+      hora_final = $6,
+      nombre_cliente = $7,
+      numero_cliente = $8,
+      motivo = $9
+    WHERE id_cita = $1
   `,
+
   DELETE: `
-    DELETE FROM CITAS WHERE ID_CITA = $1
+    DELETE FROM citas WHERE id_cita = $1
   `,
+
   SELECT_NEXT_24H: `
-    SELECT * FROM CITAS
-    WHERE FECHA_HORA BETWEEN NOW() AND NOW() + INTERVAL '1 day'
+    SELECT * FROM citas
+    WHERE fecha >= CURRENT_DATE
+      AND fecha <= CURRENT_DATE + 1
   `
 };
-
-

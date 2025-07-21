@@ -103,7 +103,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3001/api/personas/702790",
+					"raw": "http://localhost:3001/api/personas/936832",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -112,7 +112,7 @@
 					"path": [
 						"api",
 						"personas",
-						"702790"
+						"936832"
 					]
 				}
 			},
@@ -203,7 +203,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"personaId\": 992615,\r\n  \"fechaHora\": \"2025-07-13T09:30:00\",\r\n  \"motivo\": \"Ejercicio 27\"\r\n}",
+					"raw": "{\r\n  \"id_persona\": 936832,\r\n  \"titulo\": \"Consulta médica\",\r\n  \"fecha\": \"2025-07-20\",\r\n  \"hora_inicio\": \"08:30 AM\",\r\n  \"hora_final\": \"09:00 AM\",\r\n  \"nombre_cliente\": \"Ana Gómez\",\r\n  \"numero_cliente\": \"5512345678\",\r\n  \"motivo\": \"Chequeo general\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -211,12 +211,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/citas",
+					"raw": "http://localhost:3001/api/citas",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "3001",
 					"path": [
 						"api",
 						"citas"
@@ -249,12 +249,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/citas",
+					"raw": "http://localhost:3001/api/citas",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "3001",
 					"path": [
 						"api",
 						"citas"
@@ -287,16 +287,63 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/api/citas/994290",
+					"raw": "http://localhost:3001/api/citas/904626",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "3001",
 					"path": [
 						"api",
 						"citas",
-						"994290"
+						"904626"
+					],
+					"query": [
+						{
+							"key": "|",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar-Citas-Id_persona",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/api/citas/persona/936832",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"citas",
+						"persona",
+						"936832"
 					],
 					"query": [
 						{

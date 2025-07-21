@@ -1,0 +1,14 @@
+# Tipo de base de datos que usarás: oracle o postgres
+DB_CLIENT=oracle
+DB_USER=''
+DB_PASSWORD=''
+DB_CONNECTION_STRING=
+###Cambiar el nomre del archivo a .env y el contenido dejar solo la conexión que requieran
+
+# Parámetros de PostgreSQL
+#DB_CLIENT=postgres
+#DB_USER=postgres
+#DB_PASSWORD=
+#DB_HOST=localhost
+#DB_PORT=5432
+#DB_DATABASE=
